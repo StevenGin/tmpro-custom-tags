@@ -8,11 +8,11 @@ namespace Oneiromancer.TMP.Effects
     {
         public override string Tag => "wave";
         
-        [SerializeField] private float _speed;
-        [SerializeField] private Vector2 _frequency;
-        [SerializeField] private Vector2 _amplitude = Vector2.one;
+        [SerializeField] private float _sinSpacing;
+        [SerializeField] private float _frequency;
+        [SerializeField] private float _amplitude;
         
-        protected override void ApplyToCharacter(TMP_Text text, TMP_CharacterInfo charInfo)
+        protected override void ApplyToCharacter(TMP_Text text, TMP_CharacterInfo charInfo, int current, int end)
         {
             int materialIndex = charInfo.materialReferenceIndex;
             Vector3[] newVertices = text.textInfo.meshInfo[materialIndex].vertices;
@@ -20,8 +20,9 @@ namespace Oneiromancer.TMP.Effects
             for (int vertexIdx = charInfo.vertexIndex; vertexIdx < charInfo.vertexIndex + 4; vertexIdx++)
             {
                 Vector3 offset = new Vector2(
-                    _amplitude.x * Mathf.Sin(Time.realtimeSinceStartup * _speed + vertexIdx * _frequency.x),
-                    _amplitude.y * Mathf.Cos(Time.realtimeSinceStartup * _speed + vertexIdx * _frequency.y));
+                    0,
+                    _amplitude * Mathf.Sin(_frequency* (Time.realtimeSinceStartup + (current * _sinSpacing )))
+                    );
                 
                 newVertices[vertexIdx] += offset;
             }

@@ -14,10 +14,10 @@ namespace Oneiromancer.TMP.Effects
             {
                 var charInfo = text.textInfo.characterInfo[i];
                 if (charInfo.character == ' ') continue;
-                ApplyToCharacter(text, charInfo);
+                ApplyToCharacter(text, charInfo, i-startIdx, endIdx-startIdx);
             }
         }
         
-        protected abstract void ApplyToCharacter(TMP_Text text, TMP_CharacterInfo charInfo);
+        protected abstract void ApplyToCharacter(TMP_Text text, TMP_CharacterInfo charInfo, int current, int total);
     }
 }
