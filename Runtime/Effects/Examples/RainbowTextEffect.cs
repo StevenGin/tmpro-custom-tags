@@ -11,7 +11,7 @@ namespace Oneiromancer.TMP.Effects
         [SerializeField] private float _speed;
         [SerializeField] private float _frequency;
         
-        protected override void ApplyToCharacter(TMP_Text text, TMP_CharacterInfo charInfo)
+        protected override void ApplyToCharacter(TMP_Text text, TMP_CharacterInfo charInfo, int current, int end)
         {
             int materialIndex = charInfo.materialReferenceIndex;
             Color32[] newColors = text.textInfo.meshInfo[materialIndex].colors32;
